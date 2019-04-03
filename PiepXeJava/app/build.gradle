@@ -1,0 +1,148 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.xuanbang.me.piepxe"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // Enabling multidex support.
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+
+        buildConfigField "String", "BASE_ENDPOINT", "\"https://api.openweathermap.org/data/2.5/\""
+        buildConfigField "String", "NAME_DATABASE", "\"piepxe.db\""
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dexOptions {
+        maxProcessCount 2
+        javaMaxHeapSize "4g"
+        preDexLibraries false
+    }
+
+    /* I use Data Binding and Java8 in all my projects */
+    dataBinding {
+        enabled true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
+//    def srcDirs = [
+//            "application",
+//            "application/scope",
+//            "common",
+//            "presentation"
+//    ]
+//    sourceSets {
+//        main {
+//            manifest.srcFile 'java/com/xuanbang/me/piepxe/AndroidManifest.xml'
+//            java.srcDir 'java'
+//            java.includes = srcDirs.collect { 'com/xuanbang/me/piepxe' + it + '/**/*.java' }
+//            java.excludes = [
+//                    '**/build/**',
+//            ]
+//            res.srcDirs = ['java/com/xuanbang/me/piepxe/res']
+//            srcDirs.forEach {
+//                res.srcDirs += 'java/com/xuanbang/me/piepxe/' + it + '/res'
+//            }
+//        }
+//    }
+}
+
+
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    def version_appcompat = "1.1.0-alpha03"
+    def version_constraint_layout = "1.1.3"
+    def version_test_appcompat = "4.12"
+    def version_test_runner = "1.1.2-alpha02"
+    def version_test_espresso = "3.2.0-alpha02"
+    def version_material = "1.1.0-alpha05"
+    def version_view = "1.0.0"
+    def version_multidex = "2.0.1"
+    def version_lifecycle = "2.1.0-alpha03"
+
+    def version_picasso = "2.71828"
+    def version_picasso_okhttp3 = "1.1.0"
+
+    def version_butterknife = "10.1.0"
+    def version_legacy = "1.0.0"
+    def version_glide_v4 = "4.9.0"
+    def version_glide_v4aa = "4.9.0@aar"
+    def version_glide_okhttp = "4.8.0"
+
+    implementation "androidx.appcompat:appcompat:$version_appcompat"
+    implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
+    implementation "androidx.legacy:legacy-support-v4:$version_legacy"
+
+    testImplementation "junit:junit:$version_test_appcompat"
+    androidTestImplementation "androidx.test:runner:$version_test_runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$version_test_espresso"
+
+    /* Android Support Library: RecyclerView, CardView  */
+    implementation "androidx.recyclerview:recyclerview:$version_appcompat"
+    implementation "com.google.android.material:material:$version_material"
+    implementation "androidx.cardview:cardview:$version_view"
+    implementation "androidx.viewpager:viewpager:$version_view"
+
+    //64k
+    implementation "androidx.multidex:multidex:$version_multidex"
+
+    /* Android Architecture Component - LiveData & ViewModel  */
+    implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle"
+
+    /*databinding */
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$version_lifecycle"
+
+    /*Lib picasso*/
+    implementation "com.squareup.picasso:picasso:$version_picasso"
+    implementation "com.jakewharton.picasso:picasso2-okhttp3-downloader:$version_picasso_okhttp3"
+
+    // BUTTERKNIFE
+    implementation "com.jakewharton:butterknife:$version_butterknife"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$version_butterknife"
+
+    //GLIDE
+    implementation "com.github.bumptech.glide:glide:$version_glide_v4"
+    annotationProcessor "com.github.bumptech.glide:compiler:$version_glide_v4"
+
+    //Note: Avoid using @aar in your dependencies whenever possible. If you must do so,
+
+    // add transitive = true to ensure that all necessary classes are included in your APK:
+    implementation("com.github.bumptech.glide:glide:$version_glide_v4aa") {
+        transitive = true
+    }
+    implementation "com.github.bumptech.glide:okhttp3-integration:$version_glide_okhttp"
+
+
+    def version_dagger2 = "2.19"
+
+    /* Dagger2 - We are going to use dagger.android which includes
+         * support for Activity and fragment injection so we need to include
+         * the following dependencies */
+    implementation "com.google.dagger:dagger-android:$version_dagger2"
+    implementation "com.google.dagger:dagger-android-support:$version_dagger2"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$version_dagger2"
+
+    /* Dagger2 - default dependency */
+    implementation "com.google.dagger:dagger:$version_dagger2"
+    annotationProcessor "com.google.dagger:dagger-compiler:$version_dagger2"
+
+    implementation project(':domain')
+    implementation project(':util')
+}

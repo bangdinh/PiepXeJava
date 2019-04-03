@@ -1,0 +1,92 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha03'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.2-alpha02'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha02'
+
+    def room_version = "2.1.0-alpha06"
+    def version_dagger2 = "2.19"
+    def version_retrofit = "2.5.0"
+    def version_okhttp3 = "3.14.0"
+    def version_rxandroid = "2.1.1"
+    def version_rxjava = "2.2.0"
+    def version_gson = "2.8.2"
+
+    api "androidx.room:room-common:$room_version"
+    /* Android Architecture Component - Room Persistance Lib  */
+    api "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    // optional - Kotlin Extensions and Coroutines support for Room
+    api "androidx.room:room-ktx:$room_version"
+    // optional - RxJava support for Room
+    api "androidx.room:room-rxjava2:$room_version"
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    api "androidx.room:room-guava:$room_version"
+    // Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
+
+
+
+    /* Retrofit using RxJava2, Okhttp, Okhttp logging interceptor, Gson  */
+    api "com.squareup.retrofit2:retrofit:$version_retrofit"
+    api "com.squareup.retrofit2:converter-gson:$version_retrofit"
+    api "com.squareup.retrofit2:adapter-rxjava2:$version_retrofit"
+    api "com.squareup.okhttp3:logging-interceptor:$version_okhttp3"
+    api "com.squareup.okhttp3:okhttp:$version_okhttp3"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$version_okhttp3"
+
+    /*Rxjava*/
+
+    api "io.reactivex.rxjava2:rxandroid:$version_rxandroid"
+// Because RxAndroid releases are few and far between, it is recommended you also
+// explicitly depend on RxJava's latest version for bug fixes and new features.
+// (see https://github.com/ReactiveX/RxJava/releases for latest 2.x.x version)
+    api "io.reactivex.rxjava2:rxjava:$version_rxjava"
+
+    /*Lib Gson*/
+    api "com.google.code.gson:gson:$version_gson"
+
+    /* Dagger2 - We are going to use dagger.android which includes
+         * support for Activity and fragment injection so we need to include
+         * the following dependencies */
+    implementation "com.google.dagger:dagger-android:$version_dagger2"
+    implementation "com.google.dagger:dagger-android-support:$version_dagger2"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$version_dagger2"
+
+    /* Dagger2 - default dependency */
+    implementation "com.google.dagger:dagger:$version_dagger2"
+    annotationProcessor "com.google.dagger:dagger-compiler:$version_dagger2"
+
+    implementation project(':util')
+}
