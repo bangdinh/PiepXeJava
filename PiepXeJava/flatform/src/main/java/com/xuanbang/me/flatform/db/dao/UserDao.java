@@ -3,7 +3,8 @@ package com.xuanbang.me.flatform.db.dao;
 
 import com.xuanbang.me.flatform.remote.response.user.User;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -22,15 +23,23 @@ public interface UserDao {
      * this query gets all users from the table, but limits the result to just the 1st user.
      *
      * @return the user from the table
+     * Issue: Link: https://codinginfinite.com/android-room-persistent-rxjava/
+     */
+
+    /**
+     * Get user login from database
+     */
+    @Query("SELECT * FROM user LIMIT 1")
+    Flowable<List<User>> getUser();
+
+    /**
+     * Get
      */
     @Query("SELECT * FROM user WHERE login = :userLogin")
-    Flowable<User> getUser(String userLogin);
-
-    @Query("SELECT * FROM user WHERE login = :userLogin")
-    User getUsers(String userLogin);
+    Flowable<List<User>> getUser(String userLogin);
 
     @Query("SELECT * FROM user WHERE login = :userLogin AND lastRefresh > :lastRefreshMax LIMIT 1")
-    Flowable<User> hasUser(String userLogin, Date lastRefreshMax);
+    User hasUser(String userLogin, Date lastRefreshMax);
 
     /**
      * Save user to table

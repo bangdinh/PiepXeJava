@@ -4,6 +4,8 @@ import com.xuanbang.me.domain.executor.SchedulerProvider;
 import com.xuanbang.me.domain.repository.user.IAppUserRepository;
 import com.xuanbang.me.util.Preconditions;
 
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
@@ -53,6 +55,7 @@ public abstract class UseCase<T, Params> {
         if (subscriber.isDisposed())
             subscriber.dispose();
         final Flowable<T> observable = this.buildUseCaseFlowable(params)
+                .delay(300, TimeUnit.MILLISECONDS)
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui());
         addDisposable(observable.subscribeWith(subscriber));

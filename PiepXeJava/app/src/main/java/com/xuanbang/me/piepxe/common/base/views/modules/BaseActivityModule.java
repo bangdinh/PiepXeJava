@@ -28,6 +28,7 @@ public abstract class BaseActivityModule {
 //        return activity.getBaseContext();
 //    }
 
+
     @Named(ACTIVITY_FRAGMENT_MANAGER)
     @Provides
     @PerActivityScoped

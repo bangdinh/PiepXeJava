@@ -2,23 +2,15 @@ package com.xuanbang.me.piepxe.common.base.views.core;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
-import android.view.View;
 
 import com.xuanbang.me.piepxe.common.base.views.modules.BaseFragmentModule;
-
-import java.util.Objects;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import androidx.annotation.IdRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import dagger.android.support.DaggerFragment;
 
 /**
@@ -35,9 +27,6 @@ import dagger.android.support.DaggerFragment;
  */
 public abstract class BaseFragment extends DaggerFragment {
 
-    private Unbinder unbinder;
-
-    protected abstract void detach();
 
     /**
      * A reference to the activity Context is injected and used instead of the getter method. This
@@ -65,62 +54,9 @@ public abstract class BaseFragment extends DaggerFragment {
 
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        unbinder = ButterKnife.bind(this, getView());
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
     }
-
-
-    /**
-     * The onViewStateRestored(Bundle) lifecycle method is only available beginning with API level 17.
-     * Supporting API levels below 17 down to 14 requires the use of AppCompatActivity, support Fragment,
-     * and dagger.android.support APIs.
-     *
-     * @param savedInstanceState
-     */
-    @Override
-    public void onViewStateRestored(Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        // Null check on getView() is not needed since onViewStateRestored() only gets called
-        // when the View returned in onCreateView() is not null.
-
-        /*
-         * Bind the views here instead of in onViewCreated so that view state changed listeners
-         * are not invoked automatically without user interaction.
-         *
-         * If we bind before this method (e.g. onViewCreated), then any checked changed
-         * listeners bound by ButterKnife will be invoked during fragment recreation (since
-         * Android itself saves and restores the views' states.
-         *
-         * The lifecycle order is as follows (same if added via xml or java or if retain
-         * instance is true):
-         *
-         * onAttach
-         * onCreateView
-         * onViewCreated
-         * onActivityCreated
-         * onViewStateRestored
-         * onResume
-         */
-        unbinder = ButterKnife.bind(this, Objects.requireNonNull(getView()));
-    }
-
-
-    @Override
-    public void onDestroy() {
-        // This lifecycle method still gets called even if onCreateView returns a null view.
-        if (unbinder != null) {
-            unbinder.unbind();
-        }
-        super.onDestroy();
-        detach();
-    }
-
 
     protected void addChildFragment(@IdRes int containerViewId, Fragment fragment) {
         childFragmentManager

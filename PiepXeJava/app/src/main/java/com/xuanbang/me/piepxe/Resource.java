@@ -1,5 +1,7 @@
 package com.xuanbang.me.piepxe;
 
+import com.google.gson.GsonBuilder;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -64,17 +66,8 @@ public class Resource<T> {
         return result;
     }
 
-    @Override
+        @Override
     public String toString() {
-        return "Resource{" +
-                "status=" + status +
-                ", message='" + message + '\'' +
-                ", data=" + data +
-                '}';
+        return new GsonBuilder().create().toJson(this);
     }
-
-    //    @Override
-//    public String toString() {
-//        return new GsonBuilder().create().toJson(this);
-//    }
 }

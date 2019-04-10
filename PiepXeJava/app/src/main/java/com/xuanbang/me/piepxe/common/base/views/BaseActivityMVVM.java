@@ -1,6 +1,7 @@
 package com.xuanbang.me.piepxe.common.base.views;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.xuanbang.me.piepxe.common.base.views.core.BaseActivity;
 
@@ -11,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
-import butterknife.ButterKnife;
 
 public abstract class BaseActivityMVVM<T extends ViewDataBinding, V extends BaseViewModel> extends BaseActivity {
 
@@ -34,7 +34,6 @@ public abstract class BaseActivityMVVM<T extends ViewDataBinding, V extends Base
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.mViewDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
-        ButterKnife.bind(this);
         this.initData(savedInstanceState);
     }
 
@@ -48,7 +47,13 @@ public abstract class BaseActivityMVVM<T extends ViewDataBinding, V extends Base
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.e("onDestroy: ","onDestroy");
         this.mViewDataBinding = null;
-        this.mViewModel = null;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("onPause: ","onPause");
     }
 }

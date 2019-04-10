@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+
+        <variable
+            name="resource"
+            type="com.xuanbang.me.piepxe.Resource" />
+
+        <variable
+            name="status"
+            type="com.xuanbang.me.piepxe.Status" />
+
+        <variable
+            name="view"
+            type="android.view.View" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lav_loading"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:visibility="@{resource.status == status.LOADING ? view.VISIBLE : view.GONE}"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/animation_loading_w400_h400" />
+
+        <TextView
+            android:id="@+id/tv_error_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{resource.message ?? @string/unknown_error}"
+            android:visibility="@{resource.status == status.ERROR ? view.VISIBLE:view.GONE}" />
+    </LinearLayout>
+</layout>

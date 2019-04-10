@@ -1,4 +1,4 @@
-package com.xuanbang.me.domain.di;
+package com.xuanbang.me.domain.di.module;
 
 import com.xuanbang.me.domain.executor.AppSchedulerProvider;
 import com.xuanbang.me.domain.executor.SchedulerProvider;
@@ -7,22 +7,16 @@ import com.xuanbang.me.domain.repository.user.IAppUserRepository;
 import com.xuanbang.me.flatform.di.module.DbModule;
 import com.xuanbang.me.flatform.di.module.NetModule;
 
+import dagger.Binds;
 import dagger.Module;
-import dagger.Provides;
 
 @Module(includes = {DbModule.class, NetModule.class})
-public class DataModule {
+public abstract class DataModule {
 
-    @Provides
-    IAppUserRepository provideAppUserRepository(AppUserRepository repository) {
-        return repository;
-    }
+    @Binds
+    abstract IAppUserRepository provideAppUserRepository(AppUserRepository repository);
 
-
-    @Provides
-    SchedulerProvider provideChedulerProvider(AppSchedulerProvider schedulerProvider) {
-        return schedulerProvider;
-    }
-
+    @Binds
+    abstract SchedulerProvider provideChedulerProvider(AppSchedulerProvider schedulerProvider);
 
 }

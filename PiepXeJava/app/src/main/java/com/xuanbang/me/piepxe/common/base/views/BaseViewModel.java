@@ -10,6 +10,4 @@ public abstract class BaseViewModel extends AndroidViewModel {
     public BaseViewModel(@NonNull Application application) {
         super(application);
     }
-
-    public abstract void detach();
 }

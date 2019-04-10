@@ -19,22 +19,14 @@ public abstract class BaseActivity extends DaggerAppCompatActivity {
 
 
     protected final void addFragment(@IdRes int containerViewId, @NonNull Fragment fragment) {
-        fragmentManager.beginTransaction().add(containerViewId, fragment).commitNowAllowingStateLoss();
+        fragmentManager.beginTransaction().add(containerViewId, fragment).commit();
     }
 
     protected final void replaceFragment(FragmentManager fragmentManager, @IdRes int containerViewId, @NonNull Fragment fragment) {
-        fragmentManager.beginTransaction().replace(containerViewId, fragment).commitNowAllowingStateLoss();
+        fragmentManager.beginTransaction().replace(containerViewId, fragment).commit();
     }
 
     protected final void removeFragment(FragmentManager fragmentManager, @NonNull Fragment fragment) {
         fragmentManager.beginTransaction().remove(fragment).commit();
-    }
-
-    protected abstract void detach();
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        detach();
     }
 }

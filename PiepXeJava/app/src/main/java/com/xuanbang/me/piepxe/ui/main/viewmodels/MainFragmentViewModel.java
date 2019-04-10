@@ -15,8 +15,4 @@ public class MainFragmentViewModel extends BaseViewModel {
         super(application);
     }
 
-    @Override
-    public void detach() {
-
-    }
 }

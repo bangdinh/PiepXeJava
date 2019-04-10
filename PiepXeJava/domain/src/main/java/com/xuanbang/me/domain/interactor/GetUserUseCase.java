@@ -1,7 +1,5 @@
 package com.xuanbang.me.domain.interactor;
 
-import android.util.Log;
-
 import com.xuanbang.me.domain.entity.UserEntity;
 import com.xuanbang.me.domain.executor.SchedulerProvider;
 import com.xuanbang.me.domain.interactor.core.UseCase;
@@ -22,13 +20,11 @@ public class GetUserUseCase extends UseCase<UserEntity, String> {
 
     @Override
     protected Flowable<UserEntity> buildUseCaseFlowable(String s) {
-        Log.e("GetUserUseCase: ", "buildUseCaseFlowable " + s);
         return iAppRepository.getUser(s);
     }
 
     @Override
     protected Observable<UserEntity> buildUseCaseObserve(String s) {
-        Log.e("GetUserUseCase: ", "buildUseCaseObserve " + s);
         return null;
     }
 }

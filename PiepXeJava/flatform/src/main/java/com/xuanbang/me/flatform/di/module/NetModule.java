@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -33,19 +34,20 @@ public class NetModule {
     private final static String GITHUB = "github_api";
 
 
+    @Singleton
     @Provides
     Gson provideGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         return gsonBuilder.create();
     }
 
-
+    @Singleton
     @Provides
     GsonConverterFactory provideGsonConverterFactory(Gson gson) {
         return GsonConverterFactory.create(gson);
     }
 
-
+    @Singleton
     @Provides
     File provideFile(@Named(APP_CONTEXT) Context context) {
         File file = new File(context.getCacheDir(), "HttpCache");
@@ -53,13 +55,13 @@ public class NetModule {
         return file;
     }
 
-
+    @Singleton
     @Provides
     Cache provideCache(File cacheFile) {
         return new Cache(cacheFile, 10 * 1000 * 1000);//10M
     }
 
-
+    @Singleton
     @Provides
     HttpLoggingInterceptor provideHttpLoggingInterceptor() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> Timber.d(message));
@@ -67,7 +69,7 @@ public class NetModule {
         return httpLoggingInterceptor;
     }
 
-
+    @Singleton
     @Provides
     OkHttpClient provideOkhttpClient(Cache cache, HttpLoggingInterceptor httpLoggingInterceptor) {
         return new OkHttpClient()
@@ -80,6 +82,7 @@ public class NetModule {
                 .build();
     }
 
+    @Singleton
     @Provides
     @Named(WEATHER_MAP)
     Retrofit provideRetrofitWeatherMap(Gson gson) {
@@ -91,6 +94,7 @@ public class NetModule {
                 .build();
     }
 
+    @Singleton
     @Provides
     @Named(GITHUB)
     Retrofit provideRetrofitGithub(Gson gson) {
@@ -102,6 +106,7 @@ public class NetModule {
                 .build();
     }
 
+    @Singleton
     @Provides
     IUserApi provideApiWebservice(@Named(GITHUB) Retrofit restAdapter) {
         return restAdapter.create(IUserApi.class);

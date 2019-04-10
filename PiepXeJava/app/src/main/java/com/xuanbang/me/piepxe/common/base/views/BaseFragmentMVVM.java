@@ -64,7 +64,6 @@ public abstract class BaseFragmentMVVM<T extends ViewDataBinding,V extends BaseV
     public void onDestroy() {
         super.onDestroy();
         this.mViewDataBinding = null;
-        V mViewModel = null;
     }
 
     /**

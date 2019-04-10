@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white">
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+        <!--<import type="javax.rmi.CORBA.Util"/>-->
+        <variable
+            name="resource"
+            type="com.xuanbang.me.piepxe.Resource" />
+
+        <variable
+            name="status"
+            type="com.xuanbang.me.piepxe.Status" />
+
+        <variable
+            name="viewmodelNull"
+            type="com.xuanbang.me.piepxe.ui.nulls.viewmodels.NullMainActivityViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_loading">
+
+        <Button
+            android:id="@+id/button_remove_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{(view)->viewmodelNull.removeUserLocal(view)}"
+            android:text="Remove user"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            layout="@layout/loading_lottie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:resource="@{resource}"
+            app:status="@{status}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.jakewharton.butterknife'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -76,20 +76,19 @@ dependencies {
     def version_view = "1.0.0"
     def version_multidex = "2.0.1"
     def version_lifecycle = "2.1.0-alpha03"
-
     def version_picasso = "2.71828"
     def version_picasso_okhttp3 = "1.1.0"
-
-    def version_butterknife = "10.1.0"
     def version_legacy = "1.0.0"
     def version_glide_v4 = "4.9.0"
     def version_glide_v4aa = "4.9.0@aar"
     def version_glide_okhttp = "4.8.0"
+    def lottieVersion = "3.0.0"
 
     implementation "androidx.appcompat:appcompat:$version_appcompat"
     implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
     implementation "androidx.legacy:legacy-support-v4:$version_legacy"
 
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation "junit:junit:$version_test_appcompat"
     androidTestImplementation "androidx.test:runner:$version_test_runner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$version_test_espresso"
@@ -112,10 +111,6 @@ dependencies {
     /*Lib picasso*/
     implementation "com.squareup.picasso:picasso:$version_picasso"
     implementation "com.jakewharton.picasso:picasso2-okhttp3-downloader:$version_picasso_okhttp3"
-
-    // BUTTERKNIFE
-    implementation "com.jakewharton:butterknife:$version_butterknife"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$version_butterknife"
 
     //GLIDE
     implementation "com.github.bumptech.glide:glide:$version_glide_v4"
@@ -142,6 +137,9 @@ dependencies {
     /* Dagger2 - default dependency */
     implementation "com.google.dagger:dagger:$version_dagger2"
     annotationProcessor "com.google.dagger:dagger-compiler:$version_dagger2"
+
+    /*Lottie*/
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 
     implementation project(':domain')
     implementation project(':util')

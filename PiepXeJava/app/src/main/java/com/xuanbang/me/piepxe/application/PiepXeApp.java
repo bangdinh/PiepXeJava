@@ -1,12 +1,20 @@
 package com.xuanbang.me.piepxe.application;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.xuanbang.me.piepxe.di.component.DaggerAppComponent;
+import com.xuanbang.me.piepxe.di.component.DaggerAppDataBindingComponent;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
+import androidx.databinding.DataBindingUtil;
 import androidx.multidex.MultiDex;
 import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
@@ -15,14 +23,14 @@ import dagger.android.support.DaggerApplication;
 public class PiepXeApp extends DaggerApplication implements Application.ActivityLifecycleCallbacks {// implements HasActivityInjector, HasSupportFragmentInjector
 
 
-//    @Inject
-//    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
-
 //    private AppComponent appComponent = DaggerAppComponent.builder().application(this).build();
 //
 //    public  AppComponent getAppComponent() {
 //        return appComponent;
 //    }
+
+    @Inject
+    ActivityManager manager;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -33,24 +41,32 @@ public class PiepXeApp extends DaggerApplication implements Application.Activity
     @Override
     public void onCreate() {
         super.onCreate();
-//        this.injectDagger();
+        DataBindingUtil.setDefaultComponent(buildDataBindingComponent());
         registerActivityLifecycleCallbacks(this);
     }
 
-//    private void injectDagger() {
-//        appComponent.inject(this);
-//    }
+    private androidx.databinding.DataBindingComponent buildDataBindingComponent() {
+        return DaggerAppDataBindingComponent.builder().application(this).build();
+    }
 
-//    @Override
-//    public AndroidInjector<Activity> activityInjector() {
-//        return dispatchingAndroidInjector;
-//    }
+    public int getCurrentTaskId() {
+        List<ActivityManager.RunningTaskInfo> runningTasks = manager.getRunningTasks(1);
+        Log.e("ABC", "Size: " + runningTasks.size());
+
+        ActivityManager.RunningTaskInfo runningTask = runningTasks.get(0);
+        Log.e("ABC", "Size: " + runningTask.baseActivity.getPackageName());
+        return runningTask.id;
+    }
 
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         return DaggerAppComponent.builder().application(this).build();
     }
 
+
+    public static synchronized PiepXeApp get(Context context){
+        return (PiepXeApp) context.getApplicationContext();
+    }
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {

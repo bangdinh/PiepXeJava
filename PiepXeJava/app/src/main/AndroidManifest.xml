@@ -21,7 +21,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.nulls.views.NullMainActivity">
+        <activity android:name=".ui.login.views.LoginAccountActivity"></activity>
+        <activity
+            android:name=".ui.nulls.views.NullMainActivity"
+            android:launchMode="standard"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,9 +33,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.home.views.HomeActivity" />
-        <activity android:name=".ui.main.views.MainActivity">
-
-        </activity>
+        <activity
+            android:name=".ui.main.views.MainActivity"
+            android:launchMode="singleTop"></activity>
     </application>
 
 </manifest>

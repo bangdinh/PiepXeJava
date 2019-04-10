@@ -6,4 +6,5 @@ import io.reactivex.Flowable;
 
 public interface IAppUserRepository {
     Flowable<UserEntity> getUser(String usernId);
+    Flowable<UserEntity> getUser();
 }

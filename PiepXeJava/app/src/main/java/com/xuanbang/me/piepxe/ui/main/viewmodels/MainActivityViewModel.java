@@ -6,6 +6,7 @@ import android.util.Log;
 import com.xuanbang.me.domain.entity.UserEntity;
 import com.xuanbang.me.domain.interactor.GetUserUseCase;
 import com.xuanbang.me.piepxe.Resource;
+import com.xuanbang.me.piepxe.application.PiepXeApp;
 import com.xuanbang.me.piepxe.common.base.views.BaseViewModel;
 import com.xuanbang.me.piepxe.mapper.UserModelDataMapper;
 import com.xuanbang.me.piepxe.model.UserModel;
@@ -26,6 +27,8 @@ public class MainActivityViewModel extends BaseViewModel {
     @Inject
     public MainActivityViewModel(@NonNull Application application, GetUserUseCase userUseCase, UserModelDataMapper dataMapper) {
         super(application);
+        PiepXeApp app = (PiepXeApp) application;
+        Log.e(TAG,"current: "+app.getCurrentTaskId());
         this.getUserUseCase = userUseCase;
         this.dataMapper = dataMapper;
     }
@@ -37,16 +40,15 @@ public class MainActivityViewModel extends BaseViewModel {
         } else {
             results = new MutableLiveData<>();
         }
-        getUserUseCase.execute(new GetUserGithub(),idUser);
+        getUserUseCase.execute(new GetUserGithub(), idUser);
 
-        Log.e(TAG, results.getValue().toString());
         return results;
     }
 
     @Override
-    public void detach() {
+    protected void onCleared() {
+        super.onCleared();
         getUserUseCase.dispose();
-        onCleared();
     }
 
     private final class GetUserGithub extends DisposableSubscriber<UserEntity> {
@@ -54,6 +56,7 @@ public class MainActivityViewModel extends BaseViewModel {
         protected void onStart() {
             super.onStart();
             results.setValue(Resource.loading(null));
+
         }
 
         @Override
