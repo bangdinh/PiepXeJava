@@ -10,5 +10,7 @@ public interface Constant {
     String NAME_DATABASE = "piepxe.db";
     int VERSION_DB = 1;
 
-    int FRESH_TIMEOUT_IN_MINUTES = 1;
+    int FRESH_TIMEOUT_IN_MINUTES = 50;
+    String PREF_FILE_NAME = "userID";
+    int TIME_DELAY_LOGIN = 2000;
 }

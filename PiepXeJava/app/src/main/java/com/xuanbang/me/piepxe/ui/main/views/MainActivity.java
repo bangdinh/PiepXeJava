@@ -35,13 +35,13 @@ public class MainActivity extends BaseActivityMVVM<ActivityMainBinding, MainActi
         if (savedInstanceState == null && mainFragment == null) {
             addFragment(R.id.frame_contain, new MainFragment());
         }
-        mViewModel.getResults("bangdinh").observe(this, userModelResource -> {
-
-            if (userModelResource != null && userModelResource.data != null) {
-                Log.e(TAG, userModelResource.toString());
-            }
-
-        });
+//        mViewModel.getResults("bangdinh").observe(this, userModelResource -> {
+//
+//            if (userModelResource != null && userModelResource.data != null) {
+//                Log.e(TAG, userModelResource.toString());
+//            }
+//
+//        });
     }
 
     private void setupWindowAnimations() {

@@ -1,8 +1,6 @@
-package com.xuanbang.me.piepxe.utils;
+package com.xuanbang.me.domain.helper;
 
 import android.content.Context;
-
-import com.xuanbang.me.piepxe.utils.helper.SharedPrefsHelper;
 
 import javax.inject.Inject;
 import javax.inject.Named;

@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public class GetUserUseCase extends UseCase<UserEntity, String> {
 
@@ -27,4 +28,11 @@ public class GetUserUseCase extends UseCase<UserEntity, String> {
     protected Observable<UserEntity> buildUseCaseObserve(String s) {
         return null;
     }
+
+    @Override
+    protected Single<String> buildUserCaseSingle() {
+        return iAppRepository.getIdUserSharedPrefs();
+    }
+
+
 }

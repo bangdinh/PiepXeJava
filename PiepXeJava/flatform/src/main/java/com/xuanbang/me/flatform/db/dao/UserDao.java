@@ -10,6 +10,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 import io.reactivex.Flowable;
 
 /**
@@ -32,6 +33,9 @@ public interface UserDao {
     @Query("SELECT * FROM user LIMIT 1")
     Flowable<List<User>> getUser();
 
+    @Query("SELECT * FROM user WHERE login = 'bangdinh' AND lastRefresh >= :lastRefreshMax LIMIT 1")
+    User hasUser(Date lastRefreshMax);
+
     /**
      * Get
      */
@@ -46,6 +50,9 @@ public interface UserDao {
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void save(User user);//Completable
+
+    @Update
+    void updateTime(User user);
 
     /**
      * Delete all users.

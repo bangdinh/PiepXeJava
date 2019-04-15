@@ -31,4 +31,5 @@ public abstract class MainFragmentModule {
     @PerFragmentScoped
     @Binds
     abstract Fragment baseFragment(MainFragment fragment);
+
 }

@@ -1,4 +1,4 @@
-package com.xuanbang.me.piepxe.ui.nulls.config;
+package com.xuanbang.me.piepxe.ui.started.config;
 
 import javax.inject.Inject;
 

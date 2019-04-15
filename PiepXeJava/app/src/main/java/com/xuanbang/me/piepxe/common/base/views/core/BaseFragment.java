@@ -53,6 +53,9 @@ public abstract class BaseFragment extends DaggerFragment {
     protected FragmentManager childFragmentManager;
 
 
+//    @Inject
+//    protected AppCompatActivity activity;
+
     @Override
     public void onDetach() {
         super.onDetach();

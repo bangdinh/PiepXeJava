@@ -9,8 +9,9 @@ import javax.inject.Inject;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
-public class GetUserCore extends UseCase<UserEntity,Void> {
+public class GetUserCore extends UseCase<UserEntity, Void> {
 
     @Inject
     public GetUserCore(IAppUserRepository iAppRepository, SchedulerProvider schedulerProvider) {
@@ -22,8 +23,13 @@ public class GetUserCore extends UseCase<UserEntity,Void> {
         return iAppRepository.getUser();
     }
 
+
     @Override
     protected Observable<UserEntity> buildUseCaseObserve(Void aVoid) {
         return null;
+    }
+
+    protected Single<String> buildUserCaseSingle() {
+        return iAppRepository.getIdUserSharedPrefs();
     }
 }

@@ -1,6 +1,7 @@
 package com.xuanbang.me.piepxe.common.base.views;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,21 +18,21 @@ import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
 
 /**
- *  Copyright (C) 2017 MINDORKS NEXTGEN PRIVATE LIMITED
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      https://mindorks.com/license/apache-v2
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License
+ * Copyright (C) 2017 MINDORKS NEXTGEN PRIVATE LIMITED
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * https://mindorks.com/license/apache-v2
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
  */
-public abstract class BaseFragmentMVVM<T extends ViewDataBinding,V extends BaseViewModel> extends BaseFragment {
+public abstract class BaseFragmentMVVM<T extends ViewDataBinding, V extends BaseViewModel> extends BaseFragment {
 
 
     @Inject
@@ -49,13 +50,14 @@ public abstract class BaseFragmentMVVM<T extends ViewDataBinding,V extends BaseV
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mViewDataBinding = DataBindingUtil.inflate(inflater,getLayoutId(),container,false);
+        mViewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
         return mViewDataBinding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.e("BASE FM", savedInstanceState != null ? "TRUE" : "FALSE");
         initViewModel(mViewModelFactory);
         initData(savedInstanceState);
     }

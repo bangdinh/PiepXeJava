@@ -3,9 +3,10 @@ package com.xuanbang.me.piepxe.di.module;
 import com.xuanbang.me.piepxe.di.BaseModelFactory;
 import com.xuanbang.me.piepxe.di.key.ViewModelKey;
 import com.xuanbang.me.piepxe.ui.login.viewmodels.LoginAccountActivityViewModel;
+import com.xuanbang.me.piepxe.ui.login.viewmodels.LoginAccountFragmentViewModel;
 import com.xuanbang.me.piepxe.ui.main.viewmodels.MainActivityViewModel;
 import com.xuanbang.me.piepxe.ui.main.viewmodels.MainFragmentViewModel;
-import com.xuanbang.me.piepxe.ui.nulls.viewmodels.NullMainActivityViewModel;
+import com.xuanbang.me.piepxe.ui.started.viewmodels.NullMainActivityViewModel;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -37,6 +38,11 @@ public abstract class ViewModelModule {
     @ViewModelKey(LoginAccountActivityViewModel.class)
     abstract ViewModel bindLoginAccountActivityViewModel(LoginAccountActivityViewModel repoViewModel);
 
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(LoginAccountFragmentViewModel.class)
+    abstract ViewModel bindLoginAccountFragmentViewModel(LoginAccountFragmentViewModel repoViewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(BaseModelFactory factory);

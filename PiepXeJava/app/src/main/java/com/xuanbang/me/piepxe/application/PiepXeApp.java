@@ -23,12 +23,6 @@ import dagger.android.support.DaggerApplication;
 public class PiepXeApp extends DaggerApplication implements Application.ActivityLifecycleCallbacks {// implements HasActivityInjector, HasSupportFragmentInjector
 
 
-//    private AppComponent appComponent = DaggerAppComponent.builder().application(this).build();
-//
-//    public  AppComponent getAppComponent() {
-//        return appComponent;
-//    }
-
     @Inject
     ActivityManager manager;
 
@@ -64,7 +58,7 @@ public class PiepXeApp extends DaggerApplication implements Application.Activity
     }
 
 
-    public static synchronized PiepXeApp get(Context context){
+    public static synchronized PiepXeApp get(Context context) {
         return (PiepXeApp) context.getApplicationContext();
     }
 

@@ -1,13 +1,16 @@
-package com.xuanbang.me.piepxe.di.module;
+package com.xuanbang.me.domain.di.module;
 
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
+
+import com.xuanbang.me.util.Constant;
 
 import javax.inject.Singleton;
 
@@ -52,6 +55,13 @@ public class AndroidModule {
     @Provides
     ActivityManager provideActivityManager(Application application) {
         return (ActivityManager) application.getSystemService(Context.ACTIVITY_SERVICE);
+    }
+
+//    @Named(PREF_KEY_USER)
+    @Singleton
+    @Provides
+    SharedPreferences provideSharedPreferences(Application application) {
+        return application.getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
     }
 
 }

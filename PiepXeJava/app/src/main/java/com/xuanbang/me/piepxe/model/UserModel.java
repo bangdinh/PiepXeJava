@@ -6,8 +6,6 @@ import android.os.Parcelable;
 import com.google.gson.GsonBuilder;
 
 import androidx.annotation.NonNull;
-import io.reactivex.SingleObserver;
-import io.reactivex.disposables.Disposable;
 
 public class UserModel implements Parcelable {
 
@@ -23,6 +21,8 @@ public class UserModel implements Parcelable {
 
     public String blog;
 
+    public String password;
+
     public UserModel() {
     }
 
@@ -33,6 +33,7 @@ public class UserModel implements Parcelable {
         name = in.readString();
         company = in.readString();
         blog = in.readString();
+        password = in.readString();
 
     }
 
@@ -49,7 +50,6 @@ public class UserModel implements Parcelable {
     };
 
 
-
     @Override
     public int describeContents() {
         return hashCode();
@@ -63,6 +63,8 @@ public class UserModel implements Parcelable {
         dest.writeString(name);
         dest.writeString(company);
         dest.writeString(blog);
+        dest.writeString(password);
+
     }
 
 

@@ -1,11 +1,23 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorBlueWhite</item>
+        <item name="colorPrimaryDark">@color/colorBlue</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="catalogToolbarStyle">@style/Widget.Catalog.Toolbar</item>
+        <item name="catalogToolbarWithCloseButtonStyle">
+            @style/Widget.Catalog.Toolbar.WithCloseButton
+        </item>
+        <item name="windowActionModeOverlay">true</item>
     </style>
 
+    <style name="Widget.Catalog.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary" />
+
+    <style name="Widget.Catalog.Toolbar.WithCloseButton" parent="Widget.Catalog.Toolbar">
+        <item name="navigationContentDescription">@string/toolbar_navigation_close_description
+        </item>
+        <item name="navigationIcon">@drawable/ic_close_vd_theme_24px</item>
+    </style>
 </resources>

@@ -1,5 +1,6 @@
 package com.xuanbang.me.piepxe.common.base.views.core;
 
+import com.xuanbang.me.piepxe.R;
 import com.xuanbang.me.piepxe.common.base.views.modules.BaseActivityModule;
 
 import javax.inject.Inject;
@@ -19,14 +20,22 @@ public abstract class BaseActivity extends DaggerAppCompatActivity {
 
 
     protected final void addFragment(@IdRes int containerViewId, @NonNull Fragment fragment) {
-        fragmentManager.beginTransaction().add(containerViewId, fragment).commit();
+        fragmentManager.beginTransaction()
+                .add(containerViewId, fragment).commit();
     }
 
-    protected final void replaceFragment(FragmentManager fragmentManager, @IdRes int containerViewId, @NonNull Fragment fragment) {
-        fragmentManager.beginTransaction().replace(containerViewId, fragment).commit();
+    protected final void replaceFragment(@IdRes int containerViewId, @NonNull Fragment fragment) {
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(
+                        R.anim.abc_grow_fade_in_from_bottom,
+                        R.anim.abc_fade_out,
+                        R.anim.abc_fade_in,
+                        R.anim.abc_shrink_fade_out_from_bottom)
+                .replace(containerViewId, fragment)
+                .addToBackStack(null).commit();
     }
 
-    protected final void removeFragment(FragmentManager fragmentManager, @NonNull Fragment fragment) {
+    protected final void removeFragment(@NonNull Fragment fragment) {
         fragmentManager.beginTransaction().remove(fragment).commit();
     }
 }

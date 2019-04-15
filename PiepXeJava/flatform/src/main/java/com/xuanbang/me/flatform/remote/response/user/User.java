@@ -20,7 +20,6 @@ public class User {
     @ColumnInfo(name = "login")
     public String login;
 
-
     @ColumnInfo(name = "avatar_url")
     public String avatar_url;
 
@@ -40,4 +39,5 @@ public class User {
     public String toString() {
         return new GsonBuilder().create().toJson(this);
     }
+
 }

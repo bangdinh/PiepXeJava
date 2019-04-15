@@ -1,4 +1,4 @@
-package com.xuanbang.me.piepxe.ui.nulls.viewmodels;
+package com.xuanbang.me.piepxe.ui.started.viewmodels;
 
 import android.app.Application;
 import android.util.Log;
@@ -14,7 +14,9 @@ import com.xuanbang.me.piepxe.model.UserModel;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.subscribers.DisposableSubscriber;
 
 public class NullMainActivityViewModel extends BaseViewModel {
@@ -23,6 +25,7 @@ public class NullMainActivityViewModel extends BaseViewModel {
     private MutableLiveData<Resource<UserModel>> results;
     private final GetUserCore mGetUserCore;
     private final UserModelDataMapper mDataMapper;
+    private LiveData<Resource<String>> mResourceLiveData;
 
 
     @Inject
@@ -32,27 +35,38 @@ public class NullMainActivityViewModel extends BaseViewModel {
         mDataMapper = dataMapper;
     }
 
+
     public MutableLiveData<Resource<UserModel>> getResultsUser() {
         if (results != null) {
             return results;
-        } else {
-            results = new MutableLiveData<>();
         }
+        results = new MutableLiveData<>();
         mGetUserCore.execute(new GetUserLogin(), null);
         return results;
     }
 
-    private final class GetUserLogin extends DisposableSubscriber<UserEntity> {
+    public LiveData<Resource<String>> getResourceLiveData() {
+        if (mResourceLiveData != null) {
+            return mResourceLiveData;
+        }
+        mResourceLiveData = new MutableLiveData<>();
+        mGetUserCore.execute(new GetUserIdLogin());
+        return mResourceLiveData;
+    }
 
+
+    private final class GetUserLogin extends DisposableSubscriber<UserEntity> {
 
         @Override
         protected void onStart() {
             super.onStart();
+            Log.e(TAG, "onStart");
             results.setValue(Resource.loading(null));
         }
 
         @Override
         public void onNext(UserEntity userEntity) {
+            Log.e(TAG, "onNext");
             results.setValue(Resource.success(mDataMapper.transform(userEntity)));
         }
 
@@ -67,14 +81,26 @@ public class NullMainActivityViewModel extends BaseViewModel {
         }
     }
 
+    private final class GetUserIdLogin extends DisposableSingleObserver<String> {
+
+        @Override
+        public void onSuccess(String s) {
+            Log.e(TAG, "GetUserIdLogin - " + s);
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            Log.e(TAG, "GetUserIdLogin - " + e.toString());
+        }
+    }
 
     public void removeUserLocal(View view) {
 //        Toast.makeText(view.getContext(), "Remove Oki", Toast.LENGTH_SHORT).show();
-        Log.e(TAG,"Click");
+        Log.e(TAG, "Click");
     }
 
 
-    public void detach(){
+    public void detach() {
         this.onCleared();
         this.mGetUserCore.dispose();
     }

@@ -12,10 +12,14 @@ public final class Checker {
         return objects == null || objects.size() == 0;
     }
 
-    public static Date getMaxRefreshTime(Date currentTime){
+    public static <T> boolean isEmpty(T object) {
+        return object == null;
+    }
+
+    public static Date getMaxRefreshTime(Date currentTime) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(currentTime);
-        calendar.add(Calendar.MINUTE,Constant.FRESH_TIMEOUT_IN_MINUTES);
+        calendar.add(Calendar.MINUTE, -Constant.FRESH_TIMEOUT_IN_MINUTES);
         return calendar.getTime();
     }
 }

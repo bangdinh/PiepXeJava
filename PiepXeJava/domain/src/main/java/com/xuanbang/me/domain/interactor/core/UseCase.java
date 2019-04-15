@@ -4,13 +4,13 @@ import com.xuanbang.me.domain.executor.SchedulerProvider;
 import com.xuanbang.me.domain.repository.user.IAppUserRepository;
 import com.xuanbang.me.util.Preconditions;
 
-import java.util.concurrent.TimeUnit;
-
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
+import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.subscribers.DisposableSubscriber;
 
 /**
@@ -43,6 +43,8 @@ public abstract class UseCase<T, Params> {
      */
     protected abstract Observable<T> buildUseCaseObserve(Params params);
 
+    protected abstract Single<String> buildUserCaseSingle();
+
     /**
      * Executes the current use case.
      *
@@ -54,13 +56,25 @@ public abstract class UseCase<T, Params> {
         Preconditions.checkNotNull(subscriber);
         if (subscriber.isDisposed())
             subscriber.dispose();
+
         final Flowable<T> observable = this.buildUseCaseFlowable(params)
-                .delay(300, TimeUnit.MILLISECONDS)
+//                .delay(300, TimeUnit.MILLISECONDS)
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui());
         addDisposable(observable.subscribeWith(subscriber));
     }
 
+
+    public void execute(DisposableSingleObserver<String> subscriber) {
+        Preconditions.checkNotNull(subscriber);
+        if (subscriber.isDisposed()) {
+            subscriber.dispose();
+        }
+        final Single<String> observable = this.buildUserCaseSingle()
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui());
+        addDisposable(observable.subscribeWith(subscriber));
+    }
 
     /**
      * Executes the current use case.
@@ -78,6 +92,7 @@ public abstract class UseCase<T, Params> {
                 .observeOn(schedulerProvider.ui());
         addDisposable(observable.subscribeWith(observer));
     }
+
 
     /**
      * Dispose from current {@link CompositeDisposable}.

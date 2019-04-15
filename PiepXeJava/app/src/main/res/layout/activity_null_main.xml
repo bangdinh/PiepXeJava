@@ -16,7 +16,7 @@
 
         <variable
             name="viewmodelNull"
-            type="com.xuanbang.me.piepxe.ui.nulls.viewmodels.NullMainActivityViewModel" />
+            type="com.xuanbang.me.piepxe.ui.started.viewmodels.NullMainActivityViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

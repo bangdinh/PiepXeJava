@@ -1,4 +1,4 @@
-package com.xuanbang.me.piepxe.utils.helper;
+package com.xuanbang.me.domain.helper;
 
 import android.content.SharedPreferences;
 
@@ -6,8 +6,10 @@ import javax.inject.Inject;
 
 public class SharedPrefsHelper {
 
-    public static String PREF_KEY_ACCESS_TOKEN = "access-token";
+    public final static String PREF_KEY_ACCESS_TOKEN = "access-token";
+    public final static String PREF_KEY_USER = "user_name";
 
+//    @Named(PREF_KEY_USER)
     private SharedPreferences mSharedPreferences;
 
     @Inject
@@ -50,4 +52,5 @@ public class SharedPrefsHelper {
     public void deleteSavedData(String key) {
         mSharedPreferences.edit().remove(key).apply();
     }
+
 }

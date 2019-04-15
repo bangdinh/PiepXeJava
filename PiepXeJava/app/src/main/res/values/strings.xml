@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">PiepXeJava</string>
+    <string name="test">Thông tin chữ Hán và chữ Nôm dựa theo cơ sở dữ liệu của phần mềm WinVNKey, đóng góp bởi học giả Lê Sơn Thanh; đã được các tác giả đồng ý đưa vào đây. (chi tiết)</string>
+    <string name="input_username">Username</string>
+    <string name="input_password">Mật khẩu</string>
+    <string name="login_remember_pass">Nhớ mật khẩu</string>
+    <string name="login_forget_pass">Quên mật khẩu</string>
+    <string name="login_text">Đăng nhập</string>
+    <string name="login_or">Or</string>
+    <string name="login_text_fb">Login With Facebook</string>
+    <string name="login_text_google">Login with google</string>
+    <string name="login_register">Đăng kí</string>
+    <string name="input_repassword">Nhập lại mật khẩu</string>
+    <string name="login_text_confirm">Đăng kí</string>
+
+    <string name="toolbar_navigation_close_description">Close demo</string>
 </resources>
