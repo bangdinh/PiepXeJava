@@ -7,8 +7,10 @@ import android.view.View;
 
 import com.xuanbang.me.piepxe.R;
 import com.xuanbang.me.piepxe.common.base.views.BaseActivityMVVM;
+import com.xuanbang.me.piepxe.common.base.views.core.BaseActivity;
 import com.xuanbang.me.piepxe.common.base.views.modules.BaseActivityModule;
 import com.xuanbang.me.piepxe.databinding.ActivityLoginAccountBinding;
+import com.xuanbang.me.piepxe.di.scopes.PerActivityScoped;
 import com.xuanbang.me.piepxe.di.scopes.PerFragmentScoped;
 import com.xuanbang.me.piepxe.ui.login.PresenterLogin;
 import com.xuanbang.me.piepxe.ui.login.viewmodels.LoginAccountActivityViewModel;
@@ -17,6 +19,7 @@ import com.xuanbang.me.piepxe.ui.main.views.MainActivity;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import dagger.Binds;
 import dagger.android.ContributesAndroidInjector;
 
 public class LoginAccountActivity extends BaseActivityMVVM<ActivityLoginAccountBinding, LoginAccountActivityViewModel> implements PresenterLogin {
@@ -89,6 +92,10 @@ public class LoginAccountActivity extends BaseActivityMVVM<ActivityLoginAccountB
 
     @dagger.Module(includes = BaseActivityModule.class)
     public abstract static class Module {
+
+        @Binds
+        @PerActivityScoped
+        abstract BaseActivity bindBaseActivity(LoginAccountActivity activity);
 
         @PerFragmentScoped
         @ContributesAndroidInjector(modules = {LoginAccountFragment.Module.class})

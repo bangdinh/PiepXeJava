@@ -20,5 +20,4 @@ public abstract class BaseActivityModule {
         return activity.getSupportFragmentManager();
     }
 
-
 }

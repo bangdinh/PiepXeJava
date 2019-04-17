@@ -6,12 +6,18 @@ import android.util.Log;
 import com.xuanbang.me.piepxe.R;
 import com.xuanbang.me.piepxe.common.base.navigation.Navigator;
 import com.xuanbang.me.piepxe.common.base.views.BaseActivityMVVM;
+import com.xuanbang.me.piepxe.common.base.views.core.BaseActivity;
+import com.xuanbang.me.piepxe.common.base.views.modules.BaseActivityModule;
 import com.xuanbang.me.piepxe.databinding.ActivityMainBinding;
+import com.xuanbang.me.piepxe.di.scopes.PerActivityScoped;
+import com.xuanbang.me.piepxe.di.scopes.PerFragmentScoped;
 import com.xuanbang.me.piepxe.ui.main.viewmodels.MainActivityViewModel;
 
 import javax.inject.Inject;
 
 import androidx.lifecycle.ViewModelProviders;
+import dagger.Binds;
+import dagger.android.ContributesAndroidInjector;
 
 public class MainActivity extends BaseActivityMVVM<ActivityMainBinding, MainActivityViewModel> {
 
@@ -66,5 +72,18 @@ public class MainActivity extends BaseActivityMVVM<ActivityMainBinding, MainActi
         }
 
 
+    }
+
+
+    @dagger.Module(includes = BaseActivityModule.class)
+    public abstract static class Module {
+
+        @Binds
+        @PerActivityScoped
+        abstract BaseActivity bindBaseActivity(MainActivity activity);
+
+        @PerFragmentScoped
+        @ContributesAndroidInjector(modules = MainFragment.Module.class)
+        abstract MainFragment bindMainFragment();
     }
 }

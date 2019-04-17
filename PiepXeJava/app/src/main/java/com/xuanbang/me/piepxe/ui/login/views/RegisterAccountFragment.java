@@ -29,8 +29,10 @@ public class RegisterAccountFragment extends BaseFragmentMVVM<RegisterAccountFra
     }
 
     private void setupToolbar() {
-//        activity.setSupportActionBar(mViewDataBinding.toolbar);
-//        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        activity.setSupportActionBar(mViewDataBinding.toolbar);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        activity.getSupportActionBar().setTitle(getString(R.string.login_register));
+        mViewDataBinding.toolbar.setNavigationOnClickListener(v -> activity.onBackPressed());
     }
 
     @Override

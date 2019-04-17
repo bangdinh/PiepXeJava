@@ -1,14 +1,19 @@
 package com.xuanbang.me.piepxe.common.binding;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.textfield.TextInputEditText;
 
 import javax.inject.Inject;
 
@@ -46,6 +51,7 @@ public class BindingAdapter {
     public void setImageUrl(ImageView view, String src, Drawable placeholder, Drawable error,
                             int blurValue, boolean cropCircle) {
 
+
         RequestOptions options = new RequestOptions();
 
         RequestBuilder<Drawable> glideBuilder = requestManager.load(src);
@@ -82,9 +88,36 @@ public class BindingAdapter {
         textView.setText(String.format(stringFormat, variable));
     }
 
+    /**
+     * android:visibility="@{false}"
+     */
     @BindingConversion
     public static int convertBooleanToVisibility(boolean visible) {
         return visible ? View.VISIBLE : View.GONE;
+    }
+
+    @androidx.databinding.BindingAdapter("hideKeyboardOnInputDone")
+    public void hideKeyboardOnInputDone(TextInputEditText view, Boolean enabled) {
+        Log.e("Action: ", ">>> " + enabled);
+        if (!enabled) {
+            return;
+        }
+        try {
+            final TextView.OnEditorActionListener actionListener = (v, actionId, event) -> {
+                Log.e("Action: ", ">>> " + actionId);
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    view.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+                return false;
+            };
+
+            view.setOnEditorActionListener(actionListener);
+        } catch (Exception ex) {
+            Log.e("hideKeyboardOnInputDone: ", ">> Error");
+        }
+
     }
 
 }

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AndroidLifecycle</string>
+    <string name="single_activity">Activity - single activity lifecycle</string>
+    <string name="multiple_activity">Multiple Activities - navigation and back stack</string>
+    <string name="fragments">Fragments - activity and fragment lifecycle</string>
+    <string name="viewmodels_translucent_launch">Viewmodels, Translucent activities and Launch Modes</string>
+</resources>

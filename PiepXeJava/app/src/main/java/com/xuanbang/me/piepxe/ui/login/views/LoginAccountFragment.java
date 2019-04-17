@@ -57,9 +57,31 @@ public class LoginAccountFragment extends BaseFragmentMVVM<LoginAccountFragmentB
     @Override
     public void initData(Bundle saveInstanceState) {
         Log.e(TAG, "OncreateView() ");
+
         mViewModel.initViewModel();
+
         mViewDataBinding.setLoginViewModel(mViewModel);
         mViewDataBinding.setPresenterLogin(mPresenterLogin);
+
+//        mViewDataBinding.edtMail.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                if (StringUtils.isNotBlank(s)) {
+//                    mViewModel.setMail(s.toString());
+//                }
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
     }
 
     @Override

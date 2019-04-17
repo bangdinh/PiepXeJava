@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
 
         <variable
             name="presenterLogin"
@@ -28,7 +29,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="25dp"
                 app:srcCompat="@drawable/ic_components_24px" />
 
 
@@ -64,9 +65,11 @@
                         app:errorEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_mail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{loginViewModel.mUserModel.login}" />
+                            android:text="@{loginViewModel.mUserModel.login}"
+                            app:hideKeyboardOnInputDone="@{true}" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -168,8 +171,8 @@
                         android:textColor="#ff3300"
                         app:icon="@drawable/ic_icon_google"
                         app:iconGravity="start"
-                        app:rippleColor="#ffc2b3"
                         app:iconTint="#ff3300"
+                        app:rippleColor="#ffc2b3"
                         app:strokeColor="#ff3300" />
 
                 </LinearLayout>

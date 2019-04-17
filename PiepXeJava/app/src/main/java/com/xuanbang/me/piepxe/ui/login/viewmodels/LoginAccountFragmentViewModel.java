@@ -8,12 +8,13 @@ import com.xuanbang.me.piepxe.model.UserModel;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 public class LoginAccountFragmentViewModel extends BaseViewModel {
 
 
-    private MutableLiveData<UserModel> mUserModelMutableLiveData;
+    public MutableLiveData<String> mail;
     public UserModel mUserModel;
 
     @Inject
@@ -21,10 +22,23 @@ public class LoginAccountFragmentViewModel extends BaseViewModel {
         super(application);
     }
 
+
     public void initViewModel() {
-        if (mUserModel == null) {
-            mUserModel = new UserModel();
+        if (mail == null) {
+            mail = new MutableLiveData<>();
         }
+    }
+
+
+    public void setMail(String mail) {
+        this.mail.setValue(mail);
+    }
+
+    public LiveData<String> getMail() {
+        if (this.mail == null) {
+            this.mail = new MutableLiveData<>();
+        }
+        return this.mail;
     }
 
 }

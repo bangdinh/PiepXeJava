@@ -8,8 +8,10 @@ import android.util.Log;
 import com.xuanbang.me.piepxe.R;
 import com.xuanbang.me.piepxe.Status;
 import com.xuanbang.me.piepxe.common.base.views.BaseActivityMVVM;
+import com.xuanbang.me.piepxe.common.base.views.core.BaseActivity;
 import com.xuanbang.me.piepxe.common.base.views.modules.BaseActivityModule;
 import com.xuanbang.me.piepxe.databinding.ActivityNullMainBinding;
+import com.xuanbang.me.piepxe.di.scopes.PerActivityScoped;
 import com.xuanbang.me.piepxe.model.UserModel;
 import com.xuanbang.me.piepxe.ui.login.views.LoginAccountActivity;
 import com.xuanbang.me.piepxe.ui.main.views.MainActivity;
@@ -18,6 +20,7 @@ import com.xuanbang.me.util.Checker;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
+import dagger.Binds;
 
 public class NullMainActivity extends BaseActivityMVVM<ActivityNullMainBinding, NullMainActivityViewModel> {
 
@@ -91,8 +94,9 @@ public class NullMainActivity extends BaseActivityMVVM<ActivityNullMainBinding, 
 
     @dagger.Module(includes = BaseActivityModule.class)
     public abstract static class Module {
-//    @PerFragmentScoped
-//    @ContributesAndroidInjector(modules = MainFragmentModule.class)
-//    abstract MainFragment bindMainFragment();
+
+        @Binds
+        @PerActivityScoped
+        abstract BaseActivity bindBaseActivity(NullMainActivity activity);
     }
 }

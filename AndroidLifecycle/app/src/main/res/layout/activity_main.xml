@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_singleActivity"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="ActionsingleActivitiLifecycle"
+        android:text="@string/single_activity"
+        android:textAllCaps="false" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_multipleActivity"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="ActionsingleActivitiLifecycle"
+        android:text="@string/multiple_activity"
+        android:textAllCaps="false" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_fragment"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="ActionsingleActivitiLifecycle"
+        android:text="@string/fragments"
+        android:textAllCaps="false" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_viewmodel"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:onClick="ActionsingleActivitiLifecycle"
+        android:layout_height="wrap_content"
+        android:text="@string/viewmodels_translucent_launch"
+        android:textAllCaps="false" />
+</LinearLayout>
